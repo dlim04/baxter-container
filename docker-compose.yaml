@@ -1,0 +1,19 @@
+services:
+  baxter:
+    image: dlim04/baxter:latest
+    privileged: true
+    network_mode: host
+    environment:
+      LOCAL_UID: ${LOCAL_UID}
+      LOCAL_GID: ${LOCAL_GID}
+
+      BAXTER_HOSTNAME: ${BAXTER_HOSTNAME}
+    volumes:
+      - ${BXT_PATH}:/home/user/ros_ws
+      # Optional: to persist bash history
+      - ${BASH_HISTORY}:/home/user/.bash_history
+
+      # For mDNS capability required for Baxter robot
+      - /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket
+    stdin_open: true
+    tty: true
