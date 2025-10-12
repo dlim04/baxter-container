@@ -1,6 +1,6 @@
 services:
   baxter:
-    image: dlim04/baxter:latest
+    image: ghcr.io/dlim04/baxter:latest
     privileged: true
     network_mode: host
     environment:
