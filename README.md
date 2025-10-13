@@ -4,6 +4,10 @@ A container-based development environment for working with Rethink Robotics
 Baxter robots. This container provides a CLI for running ROS and catkin commands
 and integrates the Baxter SDK automatically.
 
+![Screen recording of a terminal session on Debian 13 using the Baxter container
+to execute `enable_robot and tuck_arms` commands in a Visual Studio Code
+window](docs/demo.gif)
+
 ## Features
 - Interactive container for Baxter SDK, ROS, and catkin tools.
 - Automatic Baxter SDK installation into `BXT_PATH` if not present.
