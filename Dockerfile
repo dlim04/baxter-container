@@ -27,9 +27,6 @@ RUN apt-get -qq update && \
       && \
       apt-get -qq clean
 
-# Update the rosdep database
-RUN rosdep update
-
 # Install gosu
 ARG GOSU_VERSION=1.19
 RUN ARCH="$(dpkg --print-architecture)" && \
@@ -50,13 +47,15 @@ RUN adduser --disabled-password --gecos '' user && \
 # Set user for what comes next
 USER user
 
+# Update the rosdep database
+RUN rosdep update
+
 # Environment variables
 ENV HOME=/home/user
 ENV ROS_WS=${HOME}/ros_ws
 ENV PATH=${HOME}/.local/bin:${PATH}
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-
 
 # Add baxter SDK intallation script.
 COPY --chown=root:root files/install-baxter-sdk.sh /usr/local/bin/install-baxter-sdk.sh
