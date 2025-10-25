@@ -24,8 +24,8 @@ be reachable by ping).
 ## Quick Setup
 
 1. **Copy the example files** into a new folder:
-   - [docker-compose.yaml](docker-compose.yaml)
-   - [.env](.env)
+   - [docker-compose.yaml](base/docker-compose.yaml)
+   - [.env](base/.env)
 
 2. **Edit `.env`** or modify environment variables directly in
 `docker-compose.yaml` to match your host system (see [Important .env
