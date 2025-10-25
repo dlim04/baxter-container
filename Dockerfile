@@ -7,15 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 USER root
 
 # Install Packages
-#
-# Seems like there's an issue with the packages.ros.org key
 RUN apt-get -qq update && \
-    apt-get -qq -y --no-install-recommends install \
-      wget \
-      > /dev/null && \
-    sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list' && \
-    wget -q http://packages.ros.org/ros.key -O - | apt-key add - && \
-    apt-get -qq update && \
     apt-get -qq -y --no-install-recommends install \
       avahi-daemon \
       curl \
@@ -24,7 +16,7 @@ RUN apt-get -qq update && \
       ros-indigo-control-msgs \
       ros-indigo-joystick-drivers \
       ros-indigo-baxter-sdk \
-      && \
+      > /dev/null && \
       apt-get -qq clean
 
 # Install gosu
