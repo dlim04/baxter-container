@@ -1,0 +1,21 @@
+services:
+  baxter:
+    image: ghcr.io/dlim04/baxter:vnc
+    privileged: true
+    network_mode: host
+    environment:
+      LOCAL_UID: ${LOCAL_UID}
+      LOCAL_GID: ${LOCAL_GID}
+
+      BAXTER_HOSTNAME: ${BAXTER_HOSTNAME}
+
+      DISPLAY_GEOMETRY: ${DISPLAY_GEOMETRY}
+      VNC_PASSWORD: ${VNC_PASSWORD}
+      VNC_PORT: ${VNC_PORT}
+    volumes:
+      - ${BXT_PATH}:/home/user/ros_ws
+      # Optional: to persist bash history
+      - ${BASH_HISTORY}:/home/user/.bash_history
+
+      # For mDNS capability required for Baxter robot
+      - /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket
