@@ -13,13 +13,19 @@ window](docs/demo.gif)
 - Automatic Baxter SDK installation into `BXT_PATH` if not present.
 - Docker Compose provided for easy container runs.
 - UID/GID remapping so files created in the container match your host user.
+- Desktop support via VNC.
+
+## Container Variants
+- [Base CLI environment](base/README.md): interactive shell for ROS and the Baxter SDK.
+- [VNC desktop environment](vnc/README.md): XFCE desktop reachable through VNC.
 
 ## Prerequisites
 - Host must be linux based system (tested on Debian and Ubuntu).
+- avahi-daemon installed on your host.
 - Docker and Docker Compose installed on your host (see [Install Docker
 Engine](https://docs.docker.com/engine/install/)).
 - Host machine and Baxter robot must be on the same network segment (i.e. must
-be reachable by ping).
+be reachable by ping to the `baxter_hostname.local` address).
 
 ## Quick Setup
 
@@ -28,8 +34,8 @@ be reachable by ping).
    - [.env](base/.env)
 
 2. **Edit `.env`** or modify environment variables directly in
-`docker-compose.yaml` to match your host system (see [Important .env
-Variables](#important-env-variables)).
+   `docker-compose.yaml` to match your host system (see [Important .env
+   Variables](#important-env-variables)).
 
 3. (Optional) Create a persistent bash history:
    ```bash
