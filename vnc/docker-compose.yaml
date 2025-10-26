@@ -1,6 +1,6 @@
 services:
   baxter:
-    image: ghcr.io/dlim04/baxter:vnc
+    image: dlim04/baxter:vnc
     privileged: true
     network_mode: host
     environment:
