@@ -9,7 +9,8 @@ RUN apt-get -qq update && \
     apt-get -qq -y --no-install-recommends install \
       ros-indigo-desktop-full \
       x11vnc \
-      xubuntu-desktop \
+      xfce4 \
+      xterm \
       xvfb \
       > /dev/null && \
       apt-get -qq clean
