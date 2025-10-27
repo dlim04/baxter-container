@@ -5,13 +5,21 @@ if [[ -z "${BAXTER_HOSTNAME:-}" || "${BAXTER_HOSTNAME}" == "baxter_hostname.loca
   exit 1
 fi
 
+export DISPLAY=:20
+
+# Start the X server
+Xvfb "$DISPLAY" -screen 0 "${DISPLAY_GEOMETRY}x24" &
+
+# Start the xfce environment
+xfce4-panel &
+xfdesktop &
+xfwm4 &
+xterm &
+
 port="${VNC_PORT:-5900}"
 
 args=(
-  -create
-  -env "FD_GEOM=${DISPLAY_GEOMETRY}"
-  -env FD_DEPTH=24
-  -env FD_PROG=/usr/bin/startxfce4
+  -display "${DISPLAY}"
   -rfbport "${port}"
   -forever
   -localhost
