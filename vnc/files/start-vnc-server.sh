@@ -5,7 +5,15 @@ if [[ -z "${BAXTER_HOSTNAME:-}" || "${BAXTER_HOSTNAME}" == "baxter_hostname.loca
   exit 1
 fi
 
-export DISPLAY=:20
+# Set the VNC port number based on environment variable or default to 5900
+port="${VNC_PORT:-5900}"
+
+# Set the display number based on the VNC port
+# (e.g. 5900 -> :20, 5901 -> :21, etc.)
+display_number=$((port - 5880))
+export DISPLAY=":${display_number}"
+
+echo "--- Starting on VNC Port ${port} (X Display ${DISPLAY}) ---"
 
 # Start the X server
 Xvfb "$DISPLAY" -screen 0 "${DISPLAY_GEOMETRY}x24" &
@@ -16,8 +24,7 @@ xfdesktop &
 xfwm4 &
 xterm &
 
-port="${VNC_PORT:-5900}"
-
+# Assign arguments for x11vnc
 args=(
   -display "${DISPLAY}"
   -rfbport "${port}"
@@ -30,4 +37,5 @@ if [[ -n "${VNC_PASSWORD}" ]]; then
   args+=( -passwd "${VNC_PASSWORD}" )
 fi
 
+# Start the VNC server
 exec x11vnc "${args[@]}"
