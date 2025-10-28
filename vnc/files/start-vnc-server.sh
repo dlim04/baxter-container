@@ -17,6 +17,7 @@ echo "--- Starting on VNC Port ${port} (X Display ${DISPLAY}) ---"
 
 # Start the X server
 Xvfb "$DISPLAY" -screen 0 "${DISPLAY_GEOMETRY}x24" &
+sleep 1 # Give Xvfb time to start
 
 # Start the xfce environment
 xfce4-panel &
@@ -24,10 +25,13 @@ xfdesktop &
 xfwm4 &
 xterm &
 
-# Assign arguments for x11vnc
+sleep 1 # Give Xfce time to start
+
+# Assign arguments for X11vnc
 args=(
   -display "${DISPLAY}"
   -rfbport "${port}"
+  -rfbportv6 "${port}"
   -forever
   -localhost
 )
